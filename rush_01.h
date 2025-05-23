@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/23 18:11:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/23 18:42:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int		ft_atoi(char number);
 void	ft_putstr(char *str);
 char	ft_itoa(int digit);
 
-
 void	parse_array(int **array, int highest, char **av, int start);
 void	parse(t_data *data, char **av);
 void	init_grid(t_data *data);
 int		get_highest(char **av);
+
+void	fill_corners(t_data *data);
+
+void	fill_edges(t_data *data);

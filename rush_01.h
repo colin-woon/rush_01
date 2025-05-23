@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/23 20:03:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/24 00:03:53 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
+
+typedef enum {
+	TOP,
+	BOTTOM,
+	LEFT,
+	RIGHT,
+} e_from;
 
 typedef struct s_solution {
 	int		value;
@@ -24,6 +31,7 @@ typedef struct s_validation {
 	int	can_see;
 	int	i;
 	int	j;
+	int	cur_max;
 } t_validation;
 
 typedef struct s_data {

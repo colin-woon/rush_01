@@ -6,30 +6,31 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:46:31 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/23 17:47:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/23 17:57:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush_01.h"
 
-void	parse_array(int **array, int edge_length, char **av, int start);
+void	parse_array(int **array, int highest, char **av, int start);
 void	parse(t_data *data, char **av);
 void	init_grid(t_data *data);
-int		get_edge_length(char **av);
+int		get_highest(char **av);
 
 void	parse(t_data *data, char **av)
 {
-	data->edge_length = get_edge_length(av);
-	printf("%d\n", data->edge_length);
-	data->grid = malloc(data->edge_length * sizeof(t_solution *));
+	data->highest = get_highest(av);
+	data->end = data->highest - 1;
+	// printf("%d\n", data->highest);
+	data->grid = malloc(data->highest * sizeof(t_solution *));
 	init_grid(data);
-	parse_array(&data->col_up, data->edge_length, av, 0);
-	parse_array(&data->col_down, data->edge_length, av, data->edge_length);
-	parse_array(&data->row_left, data->edge_length, av, 2 * data->edge_length);
-	parse_array(&data->row_right, data->edge_length, av, 3 * data->edge_length);
+	parse_array(&data->col_up, data->highest, av, 0);
+	parse_array(&data->col_down, data->highest, av, data->highest);
+	parse_array(&data->row_left, data->highest, av, 2 * data->highest);
+	parse_array(&data->row_right, data->highest, av, 3 * data->highest);
 }
 
-int	get_edge_length(char **av)
+int	get_highest(char **av)
 {
 	int	i;
 	int	result;
@@ -55,7 +56,7 @@ int	get_edge_length(char **av)
 	return (result / 4);
 }
 
-void	parse_array(int **array, int edge_length, char **av, int start)
+void	parse_array(int **array, int highest, char **av, int start)
 {
 	int	i;
 	int	number;
@@ -64,8 +65,8 @@ void	parse_array(int **array, int edge_length, char **av, int start)
 	i = 0;
 	number = 0;
 	array_len = 0;
-	*array = malloc((edge_length + 1) * sizeof(int));
-	while (array_len < edge_length)
+	*array = malloc((highest + 1) * sizeof(int));
+	while (array_len < highest)
 	{
 		if (av[1][i] == ' ')
 		{
@@ -90,11 +91,11 @@ void	init_grid(t_data *data)
 	int	column;
 
 	row = 0;
-	while (row < data->edge_length)
+	while (row < data->highest)
 	{
-		data->grid[row] = malloc(data->edge_length * sizeof(t_solution));
+		data->grid[row] = malloc(data->highest * sizeof(t_solution));
 		column = 0;
-		while (column < data->edge_length)
+		while (column < data->highest)
 		{
 			data->grid[row][column].value = 0;
 			data->grid[row][column].is_fixed = false;

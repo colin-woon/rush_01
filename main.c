@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:07 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 02:36:19 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 03:53:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	prune_solution(t_data *data);
 void	print_grid(t_data *data);
-bool	is_duplicate(t_data *data, t_recursion_var var);
+bool	is_duplicate(t_data *data, t_recursion_var var, int row, int col);
 bool	is_duplicate_row(t_data *data, int to_check, const int fix, int i_cur);
 bool	is_duplicate_col(t_data *data, int to_check, const int fix, int i_cur);
 void	init_validation_vars(t_validation *var, t_data *data, e_from dir, int fix);
@@ -24,8 +24,9 @@ bool is_valid_from_bottom(t_data *data, const int clue, const int fix);
 bool is_valid_from_top(t_data *data, const int clue, const int fix);
 bool	is_valid_col(t_data *data, const int i_clue);
 bool	is_valid_row(t_data *data, const int i_clue);
-void	set_index(t_data *data, int *i_row, int *i_col);
-bool	is_solve(t_data *data, int i_row, int i_col);
+bool	is_solve(t_data *data);
+void	decrement_grid_index(t_data *data, int *row, int* col);
+void	increment_grid_index(t_data *data, int *row, int* col);
 
 int main(int ac, char **av)
 {
@@ -38,7 +39,7 @@ int main(int ac, char **av)
 	}
 	parse(&data, av);
 	prune_solution(&data);
-	if (is_solve(&data, 0, 0))
+	if (is_solve(&data))
 	{
 		ft_putstr("solution found");
 		print_grid(&data);
@@ -51,16 +52,6 @@ void	prune_solution(t_data *data)
 {
 	fill_corners(data);
 	fill_edges(data);
-	// data->grid[0][data->end].value = 4;
-	// data->grid[1][data->end].value = 2;
-	// data->grid[2][data->end].value = 1;
-	// data->grid[3][data->end].value = 4;
-	// print_grid(data);
-	// if (is_valid_from_top(data, data->col_up[data->end], data->end))
-	// && is_valid_from_bottom(data, data->col_down[data->end], data->end))
-		// printf("works\n");
-	// else
-		// printf("found invalid\n");
 }
 
 void	print_grid(t_data *data)
@@ -86,69 +77,108 @@ void	print_grid(t_data *data)
 	// ft_putstr("\n");
 }
 
-bool	is_solve(t_data *data, int i_row, int i_col)
+bool	is_solve(t_data *data)
 {
 	t_recursion_var var;
-	var.row = i_row;
-	var.col = i_col;
+	// var.row = i_row;
+	// var.col = i_col;
+	// var.new_row = i_row;
+	// var.new_col = i_col;
 	var.to_check = data->highest + 1;
 	static bool	found_solution = false;
+	static int	row = 0;
+	static int	col = 0;
 	// static int loops = 0;
 
-	if (i_row == data->highest && i_col == data->highest)
+	if (row == data->highest && col == data->highest)
 	{
 		found_solution = true;
 		return (true);
 	}
-	// if (loops == 13)
+	// if (loops == 25)
 	// 	exit(0);
 	// loops++;
 	while (--var.to_check >= 0)
 	{
-		if (data->grid[i_row][i_col].is_fixed)
+		// printf("row: %d ", row);
+		// printf("col: %d ", col);
+		// printf("data_end: %d\n", data->end);
+
+		if (data->grid[row][col].is_fixed)
 		{
-			set_index(data, &var.row, &var.col);
-			if (is_solve(data, var.row, var.col + 1))
-				break ;
-		}
-		data->grid[i_row][i_col].value = var.to_check;
-		// print_grid(data);
-		if (!is_duplicate(data, var))
-		{
-			// print_grid(data);
-			// printf("row: %d ", i_row);
-			// printf("col: %d ", i_col);
-			// printf("data_end: %d\n", data->end);
-			// printf("\n");
-			if (i_col == data->end)
+			if (col == data->end)
 			{
-				// printf("entered\n");
-				if (!is_valid_row(data, i_row))
+				if (!is_valid_row(data, row))
 					continue;
 			}
-			if (i_row == data->end && !is_valid_col(data, i_col))
+			if (row == data->end)
 			{
-				// printf("entered\n");
-				continue;
+				if (!is_valid_col(data, col))
+					continue;
 			}
-			set_index(data, &var.row, &var.col);
-			if (is_solve(data, var.row, var.col + 1))
+			increment_grid_index(data, &row, &col);
+			if (is_solve(data))
+				break ;
+			else
+				continue;
+		}
+		data->grid[row][col].value = var.to_check;
+		// print_grid(data);
+		if (!is_duplicate(data, var, row, col))
+		{
+			print_grid(data);
+			// printf("row: %d ", row);
+			// printf("col: %d ", col);
+			// printf("data_end: %d\n", data->end);
+			// printf("\n");
+			if (col == data->end)
+			{
+				if (!is_valid_row(data, row))
+					continue;
+			}
+			if (row == data->end)
+			{
+				if (!is_valid_col(data, col))
+					continue;
+			}
+			increment_grid_index(data, &row, &col);
+			if (is_solve(data))
 				break ;
 		}
 	}
 	if (found_solution)
 		return (true);
+	decrement_grid_index(data, &row, &col);
 	return(false);
 }
-
-void	set_index(t_data *data, int *i_row, int *i_col)
+void	increment_grid_index(t_data *data, int *row, int* col)
 {
-	if ((*i_col) == data->end)
+	if ((*col) == data->end)
 	{
-		if ((*i_row) != data->end)
-			(*i_col) = -1;
-		(*i_row)++;
+		if ((*row) == data->end)
+		{
+			(*row) = data->highest;
+			(*col) = data->highest;
+			return ;
+		}
+		(*col) = 0;
+		(*row) += 1;
 	}
+	else
+		(*col)++;
+}
+
+void	decrement_grid_index(t_data *data, int *row, int* col)
+{
+	if ((*col) == 0)
+	{
+		if ((*row) == 0)
+			return ;
+		(*col) = data->end;
+		(*row) -= 1;
+	}
+	else
+		(*col)--;
 }
 
 bool	is_valid_row(t_data *data, const int i_clue)
@@ -328,6 +358,9 @@ bool	is_duplicate_row(t_data *data, int to_check, const int fix, int i_cur)
 	i = -1;
 	while(++i <= data->end)
 	{
+		// printf("i dup %d\n", i);
+		// printf("i cur %d to_check %d\n", i_cur, to_check);
+		// printf("\n");
 		if (i == i_cur)
 			continue;
 		if (to_check == data->grid[fix][i].value)
@@ -336,10 +369,10 @@ bool	is_duplicate_row(t_data *data, int to_check, const int fix, int i_cur)
 	return (false);
 }
 
-bool	is_duplicate(t_data *data, t_recursion_var var)
+bool	is_duplicate(t_data *data, t_recursion_var var, int row, int col)
 {
-	if (is_duplicate_col(data, var.to_check, var.col, var.row) \
-	|| is_duplicate_row(data, var.to_check, var.row, var.col))
+	if (is_duplicate_col(data, var.to_check, col, row) \
+	|| is_duplicate_row(data, var.to_check, row, col))
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/24 00:03:53 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 01:30:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,26 @@ typedef enum {
 	RIGHT,
 } e_from;
 
-typedef struct s_solution {
+typedef struct s_cell {
 	int		value;
 	bool	is_fixed;
-}	t_solution;
+}	t_cell;
+
+typedef struct s_recursion_var {
+	int	row;
+	int	col;
+	int	to_check;
+	int choice;
+} t_recursion_var;
 
 typedef struct s_validation {
 	int	can_see;
 	int	i;
-	int	j;
 	int	cur_max;
 } t_validation;
 
 typedef struct s_data {
-	t_solution	**grid;
+	t_cell	**grid;
 	int			highest;
 	int			end;
 	int			*col_up;

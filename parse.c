@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:46:31 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/23 19:09:09 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 01:37:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse(t_data *data, char **av)
 	data->highest = get_highest(av);
 	data->end = data->highest - 1;
 	// printf("%d\n", data->highest);
-	data->grid = malloc(data->highest * sizeof(t_solution *));
+	data->grid = malloc(data->highest * sizeof(t_cell *));
 	init_grid(data);
 	parse_array(&data->col_up, data->highest, av, 0);
 	parse_array(&data->col_down, data->highest, av, data->highest);
@@ -76,7 +76,7 @@ void	parse_array(int **array, int highest, char **av, int start)
 		if (number >= start)
 		{
 			(*array)[array_len] = ft_atoi(av[1][i]);
-			printf("%d ", (*array)[array_len]);
+			// printf("%d ", (*array)[array_len]);
 			array_len++;
 		}
 		number++;
@@ -93,7 +93,7 @@ void	init_grid(t_data *data)
 	row = 0;
 	while (row < data->highest)
 	{
-		data->grid[row] = malloc(data->highest * sizeof(t_solution));
+		data->grid[row] = malloc(data->highest * sizeof(t_cell));
 		column = 0;
 		while (column < data->highest)
 		{

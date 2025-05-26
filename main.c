@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:07 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 14:26:03 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:17:17 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	prune_solution(t_data *data);
 bool	is_solve(t_data *data);
+bool	is_grid_full_base_case(t_data *data, int row, int col, bool *is_found);
 
 int main(int ac, char **av)
 {
@@ -42,12 +43,9 @@ bool	is_solve(t_data *data)
 	static int	row = 0;
 	static int	col = 0;
 
-	to_check = data->highest + 1;
-	if (row == data->highest && col == data->highest)
-	{
-		found_solution = true;
+	if (is_grid_full_base_case(data, row, col, &found_solution))
 		return (true);
-	}
+	to_check = data->highest + 1;
 	while (--to_check >= 0)
 	{
 		if (data->grid[row][col].is_fixed)
@@ -92,4 +90,12 @@ bool	is_solve(t_data *data)
 	return(false);
 }
 
-
+bool	is_grid_full_base_case(t_data *data, int row, int col, bool *is_found)
+{
+	if (row == data->highest && col == data->highest)
+	{
+		(*is_found) = true;
+		return (true);
+	}
+	return (false);
+}

@@ -6,15 +6,15 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:24:01 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 14:25:06 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 16:28:02 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush_01.h"
 
 void	print_grid(t_data *data);
-void	decrement_grid_index(t_data *data, int *row, int* col);
-void	increment_grid_index(t_data *data, int *row, int* col);
+void	decrement_grid_index(t_data *data, int *row, int *col);
+void	increment_grid_index(t_data *data, int *row, int *col);
 
 void	print_grid(t_data *data)
 {
@@ -38,7 +38,7 @@ void	print_grid(t_data *data)
 	}
 }
 
-void	increment_grid_index(t_data *data, int *row, int* col)
+void	increment_grid_index(t_data *data, int *row, int *col)
 {
 	if ((*col) == data->end)
 	{
@@ -55,7 +55,7 @@ void	increment_grid_index(t_data *data, int *row, int* col)
 		(*col)++;
 }
 
-void	decrement_grid_index(t_data *data, int *row, int* col)
+void	decrement_grid_index(t_data *data, int *row, int *col)
 {
 	if ((*col) == 0)
 	{

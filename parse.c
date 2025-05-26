@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:46:31 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 14:05:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 16:23:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	get_highest(char **av)
 	result = 0;
 	while (av[1][i])
 	{
-		if(av[1][i] == ' ')
+		if (av[1][i] == ' ')
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		if (av[1][i] >= '1' && av[1][i] <= '9')
 			result++;
@@ -70,7 +70,7 @@ void	parse_array(int **array, int highest, char **av, int start)
 		if (av[1][i] == ' ')
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		if (number >= start)
 		{

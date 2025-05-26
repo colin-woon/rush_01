@@ -6,15 +6,17 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:18:33 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 14:18:51 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 16:35:13 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush_01.h"
 
-void	init_validation_vars(t_validation *var, t_data *data, e_from dir, int fix);
+void	init_validation_vars(t_validation *var, t_data *data,\
+	t_from dir, int fix);
 
-void	init_validation_vars(t_validation *var, t_data *data, e_from dir, int fix)
+void	init_validation_vars(t_validation *var, t_data *data,\
+	t_from dir, int fix)
 {
 	var->can_see = 1;
 	if (dir == TOP)

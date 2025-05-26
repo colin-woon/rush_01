@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pruning.c                                          :+:      :+:    :+:   */
+/*   pruning_edges.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 18:39:44 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/23 18:41:16 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 16:26:04 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush_01.h"
 
-void	fill_edges(t_data *data);
+void		fill_edges(t_data *data);
 static void	fill_top(t_data *data);
 static void	fill_left(t_data *data);
 static void	fill_right(t_data *data);

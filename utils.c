@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:47:20 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 15:53:51 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 16:24:26 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	clear_memory(t_data *data);
 int	ft_atoi(char number)
 {
 	if (number >= '1' && number <= '9')
-		return(number - '0');
+		return (number - '0');
 	return (0);
 }
 
 char	ft_itoa(int digit)
 {
-	return((char)(digit + '0'));
+	return ((char)(digit + '0'));
 }
 
 void	ft_putstr(char *str)
@@ -34,7 +34,7 @@ void	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		write(1, &str[i++], 1);
 }
 

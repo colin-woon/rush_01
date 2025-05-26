@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 15:26:59 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:41:55 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +75,4 @@ bool	is_valid_from_top(t_data *data, const int clue, const int fix);
 
 bool	is_valid_col(t_data *data, const int i_clue);
 bool	is_valid_row(t_data *data, const int i_clue);
+bool	is_valid_then_move(t_data *data);

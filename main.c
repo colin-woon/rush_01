@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:07 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 03:53:40 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 14:03:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,10 @@ bool	is_solve(t_data *data)
 		found_solution = true;
 		return (true);
 	}
-	// if (loops == 25)
-	// 	exit(0);
-	// loops++;
+	// printf("%d\n ",++loops);
 	while (--var.to_check >= 0)
 	{
+		// printf("%d\n ",++loops);
 		// printf("row: %d ", row);
 		// printf("col: %d ", col);
 		// printf("data_end: %d\n", data->end);
@@ -126,7 +125,7 @@ bool	is_solve(t_data *data)
 		// print_grid(data);
 		if (!is_duplicate(data, var, row, col))
 		{
-			print_grid(data);
+			// print_grid(data);
 			// printf("row: %d ", row);
 			// printf("col: %d ", col);
 			// printf("data_end: %d\n", data->end);
@@ -151,6 +150,7 @@ bool	is_solve(t_data *data)
 	decrement_grid_index(data, &row, &col);
 	return(false);
 }
+
 void	increment_grid_index(t_data *data, int *row, int* col)
 {
 	if ((*col) == data->end)
@@ -304,7 +304,7 @@ bool is_valid_from_right(t_data *data, const int clue, const int fix)
 	}
 	if (clue == var.can_see)
 	{
-		printf("true from right");
+		// printf("true from right");
 		return (true);
 	}
 	return (false);

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:07 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 15:42:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:53:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int ac, char **av)
 		print_grid(&data);
 	else
 		ft_putstr("No solution found");
+	clear_memory(&data);
 }
 
 void	prune_solution(t_data *data)

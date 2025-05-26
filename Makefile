@@ -15,13 +15,13 @@ HIDE =
 #------------------------------------------------------------------------------#
 
 # Compiler and flags
-CC		=	gcc
+CC		=	gcc $(DEBUG)
 CFLAGS	=	-Wall -Werror -Wextra -I. -I./$(INCDIR)
 RM		=	rm -f
-DEBUG 	= -g3 -fsanitize=address
+DEBUG 	=	-g3 -fsanitize=address
 
 # Output file name
-NAME	=	a.out
+NAME	=	rush_01
 
 # Sources are all .c files
 SRCDIR	=	./

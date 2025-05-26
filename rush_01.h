@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 15:41:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:53:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,25 @@ typedef struct s_validation {
 	int	can_see;
 	int	i;
 	int	cur_max;
-} t_validation;
+}	t_validation;
 
 typedef struct s_data {
 	t_cell	**grid;
-	int			highest;
-	int			end;
-	int			to_check;
-	int			row;
-	int			col;
-	int			*col_up;
-	int			*col_down;
-	int			*row_left;
-	int			*row_right;
+	int		highest;
+	int		end;
+	int		to_check;
+	int		row;
+	int		col;
+	int		*col_up;
+	int		*col_down;
+	int		*row_left;
+	int		*row_right;
 }	t_data;
 
 int		ft_atoi(char number);
 void	ft_putstr(char *str);
 char	ft_itoa(int digit);
+void	clear_memory(t_data *data);
 
 void	print_grid(t_data *data);
 void	decrement_grid_index(t_data *data, int *row, int* col);

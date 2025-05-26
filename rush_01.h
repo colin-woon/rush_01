@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 14:27:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:26:59 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_data {
 	t_cell	**grid;
 	int			highest;
 	int			end;
+	int			to_check;
+	int			row;
+	int			col;
 	int			*col_up;
 	int			*col_down;
 	int			*row_left;

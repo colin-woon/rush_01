@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:07 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 15:17:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 15:32:55 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	prune_solution(t_data *data);
 bool	is_solve(t_data *data);
 bool	is_grid_full_base_case(t_data *data, int row, int col, bool *is_found);
+void	backtracking(t_data *data, int to_check);
 
 int main(int ac, char **av)
 {
@@ -40,53 +41,14 @@ bool	is_solve(t_data *data)
 {
 	int			to_check;
 	static bool	found_solution = false;
-	static int	row = 0;
-	static int	col = 0;
 
-	if (is_grid_full_base_case(data, row, col, &found_solution))
+	if (is_grid_full_base_case(data, data->row, data->col, &found_solution))
 		return (true);
 	to_check = data->highest + 1;
-	while (--to_check >= 0)
-	{
-		if (data->grid[row][col].is_fixed)
-		{
-			if (col == data->end)
-			{
-				if (!is_valid_row(data, row))
-					continue;
-			}
-			if (row == data->end)
-			{
-				if (!is_valid_col(data, col))
-					continue;
-			}
-			increment_grid_index(data, &row, &col);
-			if (is_solve(data))
-				break ;
-			else
-				continue;
-		}
-		data->grid[row][col].value = to_check;
-		if (!is_duplicate(data, to_check, row, col))
-		{
-			if (col == data->end)
-			{
-				if (!is_valid_row(data, row))
-					continue;
-			}
-			if (row == data->end)
-			{
-				if (!is_valid_col(data, col))
-					continue;
-			}
-			increment_grid_index(data, &row, &col);
-			if (is_solve(data))
-				break ;
-		}
-	}
+	backtracking(data, to_check);
 	if (found_solution)
 		return (true);
-	decrement_grid_index(data, &row, &col);
+	decrement_grid_index(data, &data->row, &data->col);
 	return(false);
 }
 
@@ -98,4 +60,46 @@ bool	is_grid_full_base_case(t_data *data, int row, int col, bool *is_found)
 		return (true);
 	}
 	return (false);
+}
+
+void	backtracking(t_data *data, int to_check)
+{
+	while (--to_check >= 0)
+	{
+		if (data->grid[data->row][data->col].is_fixed)
+		{
+			if (data->col == data->end)
+			{
+				if (!is_valid_row(data, data->row))
+					continue;
+			}
+			if (data->row == data->end)
+			{
+				if (!is_valid_col(data, data->col))
+					continue;
+			}
+			increment_grid_index(data, &data->row, &data->col);
+			if (is_solve(data))
+				break ;
+			else
+				continue;
+		}
+		data->grid[data->row][data->col].value = to_check;
+		if (!is_duplicate(data, to_check, data->row, data->col))
+		{
+			if (data->col == data->end)
+			{
+				if (!is_valid_row(data, data->row))
+					continue;
+			}
+			if (data->row == data->end)
+			{
+				if (!is_valid_col(data, data->col))
+					continue;
+			}
+			increment_grid_index(data, &data->row, &data->col);
+			if (is_solve(data))
+				break ;
+		}
+	}
 }

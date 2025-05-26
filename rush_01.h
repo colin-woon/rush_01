@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:05:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 03:48:34 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 14:06:32 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ typedef struct s_cell {
 	int		value;
 	bool	is_fixed;
 }	t_cell;
-
-typedef struct s_recursion_var {
-	int	row;
-	int	col;
-	int	new_row;
-	int	new_col;
-	int	to_check;
-} t_recursion_var;
 
 typedef struct s_validation {
 	int	can_see;

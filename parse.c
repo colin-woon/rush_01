@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:46:31 by cwoon             #+#    #+#             */
-/*   Updated: 2025/05/26 01:37:57 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/05/26 14:05:55 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	parse(t_data *data, char **av)
 {
 	data->highest = get_highest(av);
 	data->end = data->highest - 1;
-	// printf("%d\n", data->highest);
 	data->grid = malloc(data->highest * sizeof(t_cell *));
 	init_grid(data);
 	parse_array(&data->col_up, data->highest, av, 0);
@@ -76,7 +75,6 @@ void	parse_array(int **array, int highest, char **av, int start)
 		if (number >= start)
 		{
 			(*array)[array_len] = ft_atoi(av[1][i]);
-			// printf("%d ", (*array)[array_len]);
 			array_len++;
 		}
 		number++;
@@ -99,7 +97,6 @@ void	init_grid(t_data *data)
 		{
 			data->grid[row][column].value = 0;
 			data->grid[row][column].is_fixed = false;
-			// printf("%d ", data->grid[row][column].value);
 			column++;
 		}
 		row++;
